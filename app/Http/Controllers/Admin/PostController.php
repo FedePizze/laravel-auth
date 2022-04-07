@@ -15,8 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        //dd('ciao');
+
         $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.post.index', compact('posts'));
     }
 
     /**
@@ -26,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.post.create');
     }
 
     /**
@@ -37,7 +39,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required|min:5',
+                'description' => 'required|min:10'
+            ]
+        );
     }
 
     /**
